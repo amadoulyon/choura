@@ -1,5 +1,6 @@
 <?php 
 
+
 require_once "pdo.php";
 
 $date = $_POST['date'];
@@ -7,8 +8,10 @@ $emir = $_POST['emir'];
 $participant = $_POST['participant'];
 $nomAdeb = $_POST['nomAdeb'];
 $adeb = $_POST['adeb'];
+$id_infos = 1;
 
 
+$req = $bdd->exec("DELETE FROM infos");
 
 
 $req = $bdd->prepare('INSERT INTO infos(date,emir,participant,nomAdeb,adeb) VALUE(NOW(),:e,:p,:n,:a)');
@@ -18,7 +21,7 @@ $req->execute(array(
 	'n' => $nomAdeb,
 	'a' => $adeb
 
-	));
+	)) ;
 
 $reponse = $bdd->query('SELECT * FROM infos');
 while($donnees = $reponse->fetch())
